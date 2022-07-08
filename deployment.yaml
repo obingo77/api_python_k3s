@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-flask-api
+  labels:
+    app: data-flask-api
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-flask-api
+  template:
+    metadata:
+      labels:
+        app: data-flask-api
+    spec:
+      containers:
+      - name: data-flask-api
+        image: docker.io/data-flask-api:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: FLASK_ENV
+          value: production
+        - name: FLASK_APP
+          value: data-flask-api
+        - name: FLASK_DEBUG
+          value: "false"
+        - name: FLASK_RUN_HOST
+          value: "
